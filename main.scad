@@ -3,14 +3,14 @@ $fs = 0.4;
 
 fastening_width = 40.00;
 fastening_height = 60.00;
-bed_thickness = 20.00;
+bed_thickness = 15.00;
 fastening_thickness = 4.00;
 /* Arch for the fastening */
 reflex_r = fastening_height;
 
-screw_diameter = 1.00;
-screw_head_diameter = 2.00;
-screw_head_thickness = 2.00;
+screw_diameter = 6.50;
+screw_head_diameter = 9.30;
+screw_head_thickness = 3.20;
 
 difference () {
     /* Base */
@@ -43,9 +43,10 @@ difference () {
         translate([-fastening_width/2, -bed_thickness-fastening_thickness/2, fastening_height/2])
             cube([fastening_width, bed_thickness+(reflex_r-__x)+fastening_thickness/2, fastening_thickness+screw_head_thickness]);
     }
-    translate([0, -bed_thickness/2, fastening_height/2.00 - 0.5])
-        cylinder (h=1.00 + fastening_thickness+screw_head_thickness, r=screw_diameter);
+    screw_center = -bed_thickness/2;
+    translate([0, screw_center, fastening_height/2.00 - 0.5])
+        cylinder (h=1.00 + fastening_thickness+screw_head_thickness, r=screw_diameter/2);
 
-    translate([0, -bed_thickness/2, fastening_height/2.00-1.00])
-        cylinder (h=1.00 + screw_head_thickness, r=screw_head_diameter);
+    translate([0, screw_center, fastening_height/2.00-1.00])
+        cylinder (h=1.00 + screw_head_thickness, r=screw_head_diameter/2);
 }
